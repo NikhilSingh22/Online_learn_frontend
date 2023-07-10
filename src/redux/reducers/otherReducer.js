@@ -25,7 +25,6 @@ export const otherReducer = createReducer(
       state.loading = false;
       state.error = action.payload;
     },
-
     clearError: state => {
       state.error = null;
     },

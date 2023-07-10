@@ -17,7 +17,6 @@ export const userReducer = createReducer(
       state.isAuthenticated = false;
       state.error = action.payload;
     },
-
     registerRequest: state => {
       state.loading = true;
     },
@@ -47,7 +46,6 @@ export const userReducer = createReducer(
       state.isAuthenticated = true;
       state.error = action.payload;
     },
-
     loadUserRequest: state => {
       state.loading = true;
     },
@@ -61,7 +59,6 @@ export const userReducer = createReducer(
       state.isAuthenticated = false;
       state.error = action.payload;
     },
-
     clearError: state => {
       state.error = null;
     },
@@ -109,7 +106,6 @@ export const profileReducer = createReducer(
       state.loading = false;
       state.error = action.payload;
     },
-
     forgetPasswordRequest: state => {
       state.loading = true;
     },
@@ -121,7 +117,6 @@ export const profileReducer = createReducer(
       state.loading = false;
       state.error = action.payload;
     },
-
     resetPasswordRequest: state => {
       state.loading = true;
     },
@@ -146,41 +141,6 @@ export const profileReducer = createReducer(
       state.error = action.payload;
     },
 
-    clearError: state => {
-      state.error = null;
-    },
-    clearMessage: state => {
-      state.message = null;
-    },
-  }
-);
-
-export const subscriptionReducer = createReducer(
-  {},
-  {
-    buySubscriptionRequest: state => {
-      state.loading = true;
-    },
-    buySubscriptionSuccess: (state, action) => {
-      state.loading = false;
-      state.subscriptionId = action.payload;
-    },
-    buySubscriptionFail: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    },
-
-    cancelSubscriptionRequest: state => {
-      state.loading = true;
-    },
-    cancelSubscriptionSuccess: (state, action) => {
-      state.loading = false;
-      state.message = action.payload;
-    },
-    cancelSubscriptionFail: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    },
     clearError: state => {
       state.error = null;
     },

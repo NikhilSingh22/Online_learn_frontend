@@ -15,8 +15,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { RiDeleteBin7Fill } from 'react-icons/ri';
 import { fileUploadCss } from '../../Auth/Register';
 
@@ -24,9 +23,9 @@ const CourseModal = ({
   isOpen,
   onClose,
   id,
+  courseTitle,
   deleteButtonHandler,
   addLectureHandler,
-  courseTitle,
   lectures = [],
   loading,
 }) => {
@@ -38,7 +37,6 @@ const CourseModal = ({
   const changeVideoHandler = e => {
     const file = e.target.files[0];
     const reader = new FileReader();
-
     reader.readAsDataURL(file);
 
     reader.onloadend = () => {
@@ -46,12 +44,11 @@ const CourseModal = ({
       setVideo(file);
     };
   };
-
   const handleClose = () => {
     setTitle('');
     setDescription('');
-    setVideo('');
     setVideoPrev('');
+    setVideo('');
     onClose();
   };
   return (
@@ -62,11 +59,9 @@ const CourseModal = ({
       scrollBehavior="outside"
     >
       <ModalOverlay />
-
       <ModalContent>
         <ModalHeader>{courseTitle}</ModalHeader>
         <ModalCloseButton />
-
         <ModalBody p="16">
           <Grid templateColumns={['1fr', '3fr 1fr']}>
             <Box px={['0', '16']}>
@@ -76,13 +71,12 @@ const CourseModal = ({
               </Box>
 
               <Heading children={'Lectures'} size="lg" />
-
-              {lectures.map((item, i) => (
+              {lectures.map((item, index) => (
                 <VideoCard
-                  key={i}
+                  key={index}
                   title={item.title}
-                  description={item.description}
-                  num={i + 1}
+                  desciption={item.desciption}
+                  num={index + 1}
                   lectureId={item._id}
                   courseId={id}
                   deleteButtonHandler={deleteButtonHandler}
@@ -90,7 +84,6 @@ const CourseModal = ({
                 />
               ))}
             </Box>
-
             <Box>
               <form
                 onSubmit={e =>
@@ -101,12 +94,11 @@ const CourseModal = ({
                   <Heading
                     children="Add Lecture"
                     size={'md'}
-                    textTransform="uppercase"
+                    textTransform={'uppercase'}
                   />
-
                   <Input
                     focusBorderColor="purple.300"
-                    placeholder="Title"
+                    placeholder="title"
                     value={title}
                     onChange={e => setTitle(e.target.value)}
                   />
@@ -118,8 +110,8 @@ const CourseModal = ({
                   />
 
                   <Input
-                    accept="video/mp4"
                     required
+                    accept="video/mp4"
                     type={'file'}
                     focusBorderColor="purple.300"
                     css={{
@@ -143,16 +135,15 @@ const CourseModal = ({
                     isLoading={loading}
                     w="full"
                     colorScheme={'purple'}
-                    type="submit"
+                    type={'submit'}
                   >
-                    Upload
+                    Add lecture
                   </Button>
                 </VStack>
               </form>
             </Box>
           </Grid>
         </ModalBody>
-
         <ModalFooter>
           <Button onClick={handleClose}>Close</Button>
         </ModalFooter>
@@ -165,7 +156,7 @@ export default CourseModal;
 
 function VideoCard({
   title,
-  description,
+  desciption,
   num,
   lectureId,
   courseId,
@@ -183,9 +174,8 @@ function VideoCard({
     >
       <Box>
         <Heading size={'sm'} children={`#${num} ${title}`} />
-        <Text children={description} />
+        <Text children={desciption} />
       </Box>
-
       <Button
         isLoading={loading}
         color={'purple.600'}

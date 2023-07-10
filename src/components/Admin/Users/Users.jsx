@@ -24,12 +24,9 @@ import {
   updateUserRole,
 } from '../../../redux/actions/admin';
 import toast from 'react-hot-toast';
-
 const Users = () => {
-  const { users, loading, error, message } = useSelector(state => state.admin);
-
   const dispatch = useDispatch();
-
+  const { users, loading, error, message } = useSelector(state => state.admin);
   const updateHandler = userId => {
     dispatch(updateUserRole(userId));
   };
@@ -42,27 +39,22 @@ const Users = () => {
       toast.error(error);
       dispatch({ type: 'clearError' });
     }
-
     if (message) {
       toast.success(message);
       dispatch({ type: 'clearMessage' });
     }
-
     dispatch(getAllUsers());
   }, [dispatch, error, message]);
-
   return (
     <Grid
-      css={{
-        cursor: `url(${cursor}), default`,
-      }}
+      css={{ cursor: `url(${cursor}), default` }}
       minH={'100vh'}
       templateColumns={['1fr', '5fr 1fr']}
     >
       <Box p={['0', '16']} overflowX="auto">
         <Heading
           textTransform={'uppercase'}
-          children="All Users"
+          children="all Users"
           my="16"
           textAlign={['center', 'left']}
         />
@@ -70,7 +62,6 @@ const Users = () => {
         <TableContainer w={['100vw', 'full']}>
           <Table variant={'simple'} size="lg">
             <TableCaption>All available users in the database</TableCaption>
-
             <Thead>
               <Tr>
                 <Th>Id</Th>
@@ -81,7 +72,6 @@ const Users = () => {
                 <Th isNumeric>Action</Th>
               </Tr>
             </Thead>
-
             <Tbody>
               {users &&
                 users.map(item => (
@@ -117,7 +107,6 @@ function Row({ item, updateHandler, deleteButtonHandler, loading }) {
           ? 'Active'
           : 'Not Active'}
       </Td>
-
       <Td isNumeric>
         <HStack justifyContent={'flex-end'}>
           <Button
@@ -128,7 +117,6 @@ function Row({ item, updateHandler, deleteButtonHandler, loading }) {
           >
             Change Role
           </Button>
-
           <Button
             onClick={() => deleteButtonHandler(item._id)}
             color={'purple.600'}

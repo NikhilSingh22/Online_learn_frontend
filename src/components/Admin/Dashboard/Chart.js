@@ -25,7 +25,6 @@ ChartJS.register(
 
 export const LineChart = ({ views = [] }) => {
   const labels = getLastYearMonths();
-
   const options = {
     responsive: true,
     plugins: {
@@ -38,7 +37,6 @@ export const LineChart = ({ views = [] }) => {
       },
     },
   };
-
   const data = {
     labels,
     datasets: [
@@ -46,28 +44,26 @@ export const LineChart = ({ views = [] }) => {
         label: 'Views',
         data: views,
         borderColor: 'rgba(107,70,193,0.5)',
-        backgroundColor: '#6b46c1',
+        backgroundColor: '#6b4671',
       },
     ],
   };
-
   return <Line options={options} data={data} />;
 };
 
-export const DoughnutChart = ({ users = [] }) => {
+export const DoughnutChart = () => {
   const data = {
-    labels: ['Subscribed', 'Not Subscribed'],
+    labels: ['subscribed', 'Not Subscribed'],
     datasets: [
       {
         label: 'Views',
-        data: users,
+        data: [3, 20], // users, this should be taken as paramter from function {users: []}
         borderColor: ['rgb(62,12,171)', 'rgb(214,43,129)'],
         backgroundColor: ['rgba(62,12,171,0.3)', 'rgba(214,43,129,0.3)'],
         borderWidth: 1,
       },
     ],
   };
-
   return <Doughnut data={data} />;
 };
 

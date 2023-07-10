@@ -1,4 +1,5 @@
-import { server } from '../store';
+import { server } from '../store.js';
+
 import axios from 'axios';
 
 export const getAllCourses =

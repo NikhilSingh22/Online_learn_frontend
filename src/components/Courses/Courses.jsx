@@ -10,17 +10,17 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getAllCourses } from '../../redux/actions/course';
-import toast from 'react-hot-toast';
 import { addToPlaylist } from '../../redux/actions/profile';
 import { loadUser } from '../../redux/actions/user';
 
 const Course = ({
   views,
   title,
-  imageSrc,
+  imagesSrc,
   id,
   addToPlaylistHandler,
   creator,
@@ -30,7 +30,7 @@ const Course = ({
 }) => {
   return (
     <VStack className="course" alignItems={['center', 'flex-start']}>
-      <Image src={imageSrc} boxSize="60" objectFit={'contain'} />
+      <Image src={imagesSrc} boxSize="60" objectFit={'contain'} />
       <Heading
         textAlign={['center', 'left']}
         maxW="200px"
@@ -39,15 +39,13 @@ const Course = ({
         noOfLines={3}
         children={title}
       />
-      <Text noOfLines={2} children={description} />
-
+      <Text noOfLines={3} children={description} />
       <HStack>
         <Text
           fontWeight={'bold'}
           textTransform="uppercase"
-          children={'Creator'}
+          children={'creator'}
         />
-
         <Text
           fontFamily={'body'}
           textTransform="uppercase"
@@ -61,8 +59,8 @@ const Course = ({
         children={`Lectures - ${lectureCount}`}
         textTransform="uppercase"
       />
-
       <Heading
+        textAlign={'center'}
         size="xs"
         children={`Views - ${views}`}
         textTransform="uppercase"
@@ -74,11 +72,11 @@ const Course = ({
         </Link>
         <Button
           isLoading={loading}
-          variant={'ghost'}
           colorScheme={'yellow'}
+          variant={'ghost'}
           onClick={() => addToPlaylistHandler(id)}
         >
-          Add to playlist
+          Add to Playlist
         </Button>
       </Stack>
     </VStack>
@@ -90,15 +88,14 @@ const Courses = () => {
   const [category, setCategory] = useState('');
   const dispatch = useDispatch();
 
-  const addToPlaylistHandler = async couseId => {
-    await dispatch(addToPlaylist(couseId));
+  const addToPlaylistHandler = async courseId => {
+    await dispatch(addToPlaylist(courseId));
     dispatch(loadUser());
   };
-
   const categories = [
-    'Web development',
-    'Artificial Intellegence',
-    'Data Structure & Algorithm',
+    'Web Development',
+    'Artificial Intelligence',
+    'Data structures and Algorithms',
     'App Development',
     'Data Science',
     'Game Development',
@@ -115,17 +112,15 @@ const Courses = () => {
       toast.error(error);
       dispatch({ type: 'clearError' });
     }
-
     if (message) {
       toast.success(message);
       dispatch({ type: 'clearMessage' });
     }
-  }, [category, keyword, dispatch, error, message]);
+  }, [dispatch, category, keyword, error, message]);
 
   return (
-    <Container minH={'95vh'} maxW="container.lg" paddingY={'8'}>
+    <Container minH={'95vh'} maxW="container.lg" padding={'8'}>
       <Heading children="All Courses" m={'8'} />
-
       <Input
         value={keyword}
         onChange={e => setKeyword(e.target.value)}
@@ -133,15 +128,10 @@ const Courses = () => {
         type={'text'}
         focusBorderColor="yellow.500"
       />
-
       <HStack
         overflowX={'auto'}
         paddingY="8"
-        css={{
-          '&::-webkit-scrollbar': {
-            display: 'none',
-          },
-        }}
+        css={{ '&::-webkit-scrollbar': { display: 'none' } }}
       >
         {categories.map((item, index) => (
           <Button key={index} onClick={() => setCategory(item)} minW={'60'}>
@@ -163,7 +153,7 @@ const Courses = () => {
               title={item.title}
               description={item.description}
               views={item.views}
-              imageSrc={item.poster.url}
+              imagesSrc={item.poster.url}
               id={item._id}
               creator={item.createdBy}
               lectureCount={item.numOfVideos}
@@ -172,7 +162,7 @@ const Courses = () => {
             />
           ))
         ) : (
-          <Heading mt="4" children="Courses Not Found" />
+          <Heading opacity={0.7} mt="4" children={`Courses Not Found`} />
         )}
       </Stack>
     </Container>

@@ -46,8 +46,8 @@ function LinkButton({ url, Icon, text, active }) {
   return (
     <Link to={`/admin/${url}`}>
       <Button
-        fontSize={'larger'}
-        variant="ghost"
+        fontSize={'large'}
+        variant={'ghost'}
         colorScheme={active ? 'purple' : ''}
       >
         <Icon style={{ margin: '4px' }} />

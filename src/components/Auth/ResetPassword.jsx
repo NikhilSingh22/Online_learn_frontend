@@ -1,13 +1,12 @@
 import { Button, Container, Heading, Input, VStack } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { resetPassword } from '../../redux/actions/profile';
+import { resetpassword } from '../../redux/actions/profile';
 
 const ResetPassword = () => {
   const [password, setPassword] = useState('');
-
   const params = useParams();
   const navigate = useNavigate();
 
@@ -16,7 +15,7 @@ const ResetPassword = () => {
   const dispatch = useDispatch();
   const submitHandler = e => {
     e.preventDefault();
-    dispatch(resetPassword(params.token, password));
+    dispatch(resetpassword(params.token, password));
   };
 
   useEffect(() => {
@@ -29,7 +28,7 @@ const ResetPassword = () => {
       dispatch({ type: 'clearMessage' });
       navigate('/login');
     }
-  }, [dispatch, error, message]);
+  }, [dispatch, error, message, navigate]);
 
   return (
     <Container py={'16'} h="90vh">
@@ -46,7 +45,7 @@ const ResetPassword = () => {
             required
             value={password}
             onChange={e => setPassword(e.target.value)}
-            placeholder="New Password"
+            placeholder="new password"
             type={'password'}
             focusBorderColor="yellow.500"
           />
@@ -64,5 +63,4 @@ const ResetPassword = () => {
     </Container>
   );
 };
-
 export default ResetPassword;

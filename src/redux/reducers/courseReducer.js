@@ -14,7 +14,6 @@ export const courseReducer = createReducer(
       state.loading = false;
       state.error = action.payload;
     },
-
     getCourseRequest: state => {
       state.loading = true;
     },
@@ -26,7 +25,6 @@ export const courseReducer = createReducer(
       state.loading = false;
       state.error = action.payload;
     },
-
     addToPlaylistRequest: state => {
       state.loading = true;
     },
@@ -38,7 +36,6 @@ export const courseReducer = createReducer(
       state.loading = false;
       state.error = action.payload;
     },
-
     clearError: state => {
       state.error = null;
     },

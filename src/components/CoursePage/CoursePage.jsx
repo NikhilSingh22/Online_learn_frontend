@@ -1,7 +1,8 @@
 import { Box, Grid, Heading, Text, VStack } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
+// import introVideo from '../../assets/videos/intro.mp4';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { getCourseLectures } from '../../redux/actions/course';
 import Loader from '../Layout/Loader/Loader';
 
@@ -12,17 +13,9 @@ const CoursePage = ({ user }) => {
 
   const dispatch = useDispatch();
   const params = useParams();
-
   useEffect(() => {
     dispatch(getCourseLectures(params.id));
   }, [dispatch, params.id]);
-
-  if (
-    user.role !== 'admin' &&
-    (user.subscription === undefined || user.subscription.status !== 'active')
-  ) {
-    return <Navigate to={'/subscribe'} />;
-  }
 
   return loading ? (
     <Loader />
@@ -34,21 +27,21 @@ const CoursePage = ({ user }) => {
             <video
               width={'100%'}
               controls
+              src={lectures[lectureNumber].video.url}
               controlsList="nodownload noremoteplayback"
               disablePictureInPicture
               disableRemotePlayback
-              src={lectures[lectureNumber].video.url}
             ></video>
 
             <Heading
-              m="4"
-              children={`#${lectureNumber + 1} ${
+              children={`# ${lectureNumber + 1} ${
                 lectures[lectureNumber].title
               }`}
+              m="4"
             />
+            <Heading children="Description" m="4" />
 
-            <Heading m="4" children="Description" />
-            <Text m="4" children={lectures[lectureNumber].description} />
+            <Text m="4" children={`${lectures[lectureNumber].description}`} />
           </Box>
 
           <VStack>
@@ -65,6 +58,7 @@ const CoursePage = ({ user }) => {
                 }}
               >
                 <Text noOfLines={1}>
+                  {' '}
                   #{index + 1} {element.title}
                 </Text>
               </button>
@@ -72,7 +66,7 @@ const CoursePage = ({ user }) => {
           </VStack>
         </>
       ) : (
-        <Heading children="No Lectures" />
+        <Heading children={`No lectures`} />
       )}
     </Grid>
   );

@@ -1,4 +1,5 @@
-import { server } from '../store';
+import { server } from '../store.js';
+
 import axios from 'axios';
 
 export const updateProfile = (name, email) => async dispatch => {
@@ -13,9 +14,8 @@ export const updateProfile = (name, email) => async dispatch => {
       },
       {
         headers: {
-          'Content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
-
         withCredentials: true,
       }
     );
@@ -29,32 +29,7 @@ export const updateProfile = (name, email) => async dispatch => {
   }
 };
 
-export const updateProfilePicture = formdata => async dispatch => {
-  try {
-    dispatch({ type: 'updateProfilePictureRequest' });
-
-    const { data } = await axios.put(
-      `${server}/updateprofilepicture`,
-      formdata,
-      {
-        headers: {
-          'Content-type': 'multipart/form-data',
-        },
-
-        withCredentials: true,
-      }
-    );
-
-    dispatch({ type: 'updateProfilePictureSuccess', payload: data.message });
-  } catch (error) {
-    dispatch({
-      type: 'updateProfilePictureFail',
-      payload: error.response.data.message,
-    });
-  }
-};
-
-export const changePassword = (oldPassword, newPassword) => async dispatch => {
+export const changepassword = (oldPassword, newPassword) => async dispatch => {
   try {
     dispatch({ type: 'changePasswordRequest' });
 
@@ -66,9 +41,8 @@ export const changePassword = (oldPassword, newPassword) => async dispatch => {
       },
       {
         headers: {
-          'Content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
-
         withCredentials: true,
       }
     );
@@ -82,18 +56,40 @@ export const changePassword = (oldPassword, newPassword) => async dispatch => {
   }
 };
 
+export const updateprofilePicture = formdata => async dispatch => {
+  try {
+    dispatch({ type: 'updateProfilePictureRequest' });
+
+    const { data } = await axios.put(
+      `${server}/updateprofilepicture`,
+      formdata,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+        withCredentials: true,
+      }
+    );
+
+    dispatch({ type: 'updateProfilePictureSuccess', payload: data.message });
+  } catch (error) {
+    dispatch({
+      type: 'updateProfilePictureFail',
+      payload: error.response.data.message,
+    });
+  }
+};
+
 export const forgetPassword = email => async dispatch => {
   try {
     dispatch({ type: 'forgetPasswordRequest' });
 
     const config = {
       headers: {
-        'Content-type': 'application/json',
+        'Content-Type': 'application/json',
       },
-
       withCredentials: true,
     };
-
     const { data } = await axios.post(
       `${server}/forgetpassword`,
       {
@@ -111,17 +107,16 @@ export const forgetPassword = email => async dispatch => {
   }
 };
 
-export const resetPassword = (token, password) => async dispatch => {
+export const resetpassword = (token, password) => async dispatch => {
   try {
     dispatch({ type: 'resetPasswordRequest' });
+
     const config = {
       headers: {
-        'Content-type': 'application/json',
+        'Content-Type': 'application/json',
       },
-
       withCredentials: true,
     };
-
     const { data } = await axios.put(
       `${server}/resetpassword/${token}`,
       {
@@ -139,15 +134,16 @@ export const resetPassword = (token, password) => async dispatch => {
   }
 };
 
+//add to playlist
+
 export const addToPlaylist = id => async dispatch => {
   try {
     dispatch({ type: 'addToPlaylistRequest' });
 
     const config = {
       headers: {
-        'Content-type': 'application/json',
+        'Content-Type': 'application/json',
       },
-
       withCredentials: true,
     };
 

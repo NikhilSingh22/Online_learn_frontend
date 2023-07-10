@@ -1,19 +1,20 @@
-import { server } from '../store';
+import { server } from '../store.js';
+
 import axios from 'axios';
 
-export const createCourse = formData => async dispatch => {
+export const createCourse = formdata => async dispatch => {
   try {
+    dispatch({ type: 'createCourseRequest' });
+
     const config = {
       headers: {
         'Content-type': 'multipart/form-data',
       },
       withCredentials: true,
     };
-    dispatch({ type: 'createCourseRequest' });
-
     const { data } = await axios.post(
       `${server}/createcourse`,
-      formData,
+      formdata,
       config
     );
 
@@ -28,11 +29,11 @@ export const createCourse = formData => async dispatch => {
 
 export const deleteCourse = id => async dispatch => {
   try {
+    dispatch({ type: 'deleteCourseRequest' });
+
     const config = {
       withCredentials: true,
     };
-    dispatch({ type: 'deleteCourseRequest' });
-
     const { data } = await axios.delete(`${server}/course/${id}`, config);
 
     dispatch({ type: 'deleteCourseSuccess', payload: data.message });
@@ -43,17 +44,16 @@ export const deleteCourse = id => async dispatch => {
     });
   }
 };
-
 export const addLecture = (id, formdata) => async dispatch => {
   try {
+    dispatch({ type: 'addLectureRequest' });
+
     const config = {
       headers: {
         'Content-type': 'multipart/form-data',
       },
       withCredentials: true,
     };
-    dispatch({ type: 'addLectureRequest' });
-
     const { data } = await axios.post(
       `${server}/course/${id}`,
       formdata,
@@ -71,13 +71,13 @@ export const addLecture = (id, formdata) => async dispatch => {
 
 export const deleteLecture = (courseId, lectureId) => async dispatch => {
   try {
+    dispatch({ type: 'deleteLectureRequest' });
+
     const config = {
       withCredentials: true,
     };
-    dispatch({ type: 'deleteLectureRequest' });
-
     const { data } = await axios.delete(
-      `${server}/lecture?courseId=${courseId}&lectureId=${lectureId}`,
+      `${server}/deletelecture?courseId=${courseId}&lectureId=${lectureId}`,
       config
     );
 
@@ -92,11 +92,11 @@ export const deleteLecture = (courseId, lectureId) => async dispatch => {
 
 export const getAllUsers = () => async dispatch => {
   try {
+    dispatch({ type: 'getAllUsersRequest' });
+
     const config = {
       withCredentials: true,
     };
-    dispatch({ type: 'getAllUsersRequest' });
-
     const { data } = await axios.get(`${server}/admin/users`, config);
 
     dispatch({ type: 'getAllUsersSuccess', payload: data.users });
@@ -110,11 +110,11 @@ export const getAllUsers = () => async dispatch => {
 
 export const updateUserRole = id => async dispatch => {
   try {
+    dispatch({ type: 'updateUserRoleRequest' });
+
     const config = {
       withCredentials: true,
     };
-    dispatch({ type: 'updateUserRoleRequest' });
-
     const { data } = await axios.put(`${server}/admin/user/${id}`, {}, config);
 
     dispatch({ type: 'updateUserRoleSuccess', payload: data.message });
@@ -128,11 +128,11 @@ export const updateUserRole = id => async dispatch => {
 
 export const deleteUser = id => async dispatch => {
   try {
+    dispatch({ type: 'deleteUserRequest' });
+
     const config = {
       withCredentials: true,
     };
-    dispatch({ type: 'deleteUserRequest' });
-
     const { data } = await axios.delete(`${server}/admin/user/${id}`, config);
 
     dispatch({ type: 'deleteUserSuccess', payload: data.message });
@@ -146,11 +146,11 @@ export const deleteUser = id => async dispatch => {
 
 export const getDashboardStats = () => async dispatch => {
   try {
+    dispatch({ type: 'getAdminStatsRequest' });
+
     const config = {
       withCredentials: true,
     };
-    dispatch({ type: 'getAdminStatsRequest' });
-
     const { data } = await axios.get(`${server}/admin/stats`, config);
 
     dispatch({ type: 'getAdminStatsSuccess', payload: data });
