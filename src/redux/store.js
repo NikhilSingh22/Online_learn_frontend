@@ -20,4 +20,4 @@ const store = configureStore({
 
 export default store;
 
-export const server = 'https://coursebundler.herokuapp.com/api/v1';
+export const server = 'https://online-learn-backend.onrender.com/api/v1';
