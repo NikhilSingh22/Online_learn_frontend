@@ -5,17 +5,12 @@ import { Link } from 'react-router-dom';
 
 const NotFound = () => {
   return (
-    <Container h={'95vh'}>
+    <Container h="90vh">
       <VStack justifyContent={'center'} h="full" spacing={'4'}>
         <RiErrorWarningFill size={'5rem'} />
-        <Heading
-          my="4"
-          textAlign={'center'}
-          size="lg"
-          children="Page Not Found"
-        />
+        <Heading>Page Not Found</Heading>
         <Link to="/">
-          <Button variant="ghost">Go to Home</Button>
+          <Button variant={'ghost'}>Go to home</Button>
         </Link>
       </VStack>
     </Container>
