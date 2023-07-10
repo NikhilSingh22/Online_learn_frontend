@@ -20,7 +20,7 @@ const UpdateProfile = ({ user }) => {
 
   const { loading } = useSelector(state => state.profile);
   return (
-    <Container py="16" minH={'90vh'}>
+    <Container py={'16'} minH="90vh">
       <form onSubmit={submitHandler}>
         <Heading
           textTransform={'uppercase'}
@@ -36,8 +36,9 @@ const UpdateProfile = ({ user }) => {
             placeholder="Name"
             type={'text'}
             focusBorderColor="yellow.500"
-          />{' '}
+          />
           <Input
+            required
             value={email}
             onChange={e => setEmail(e.target.value)}
             placeholder="Email"
@@ -50,7 +51,7 @@ const UpdateProfile = ({ user }) => {
             colorScheme={'yellow'}
             type="submit"
           >
-            Update
+            Change
           </Button>
         </VStack>
       </form>

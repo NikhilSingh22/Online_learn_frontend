@@ -1,13 +1,13 @@
 import React from 'react';
 import {
-  Box,
-  Button,
   Heading,
-  HStack,
-  Image,
   Stack,
-  Text,
   VStack,
+  Text,
+  Button,
+  Image,
+  Box,
+  HStack,
 } from '@chakra-ui/react';
 import './home.css';
 import { Link } from 'react-router-dom';
@@ -17,7 +17,7 @@ import { SiCoursera, SiUdemy } from 'react-icons/si';
 import { DiAws } from 'react-icons/di';
 import introVideo from '../../assets/videos/intro.mp4';
 
-const Home = () => {
+function Home() {
   return (
     <section className="home">
       <div className="container">
@@ -26,19 +26,22 @@ const Home = () => {
           height="100%"
           justifyContent={['center', 'space-between']}
           alignItems="center"
-          spacing={['16', '56']}
+          spacing={['16', '18', '20', '56']}
         >
           <VStack
             width={'full'}
             alignItems={['center', 'flex-end']}
-            spacing="8"
+            spacing="5"
           >
-            <Heading children="LEARN FROM THE EXPERTS" size={'2xl'} />
-            <Text
-              fontSize={'2xl'}
-              fontFamily="cursive"
+            <Heading
               textAlign={['center', 'left']}
-              children="Find Valuable Content At Reasonable Price"
+              children="LEARN FROM THE EXPERTS"
+              size={'lg'}
+            />
+            <Text
+              textAlign={['center', 'left']}
+              fontSize={'large'}
+              children="Find Valueable Context At Resonable Price"
             />
             <Link to="/courses">
               <Button size={'lg'} colorScheme="yellow">
@@ -46,7 +49,6 @@ const Home = () => {
               </Button>
             </Link>
           </VStack>
-
           <Image
             className="vector-graphics"
             boxSize={'md'}
@@ -78,15 +80,16 @@ const Home = () => {
 
       <div className="container2">
         <video
+          // autoPlay
           controls
+          src={introVideo}
           controlsList="nodownload nofullscreen noremoteplayback"
           disablePictureInPicture
           disableRemotePlayback
-          src={introVideo}
         ></video>
       </div>
     </section>
   );
-};
+}
 
 export default Home;

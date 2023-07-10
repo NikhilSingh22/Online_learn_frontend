@@ -1,7 +1,6 @@
 import { Button, Container, Heading, Input, VStack } from '@chakra-ui/react';
-import React, { useState } from 'react';
-import { useEffect } from 'react';
-import toast from 'react-hot-toast';
+import React, { useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { forgetPassword } from '../../redux/actions/profile';
 
@@ -40,6 +39,7 @@ const ForgetPassword = () => {
         <VStack spacing={'8'}>
           <Input
             required
+            id="email"
             value={email}
             onChange={e => setEmail(e.target.value)}
             placeholder="abc@gmail.com"
@@ -53,7 +53,7 @@ const ForgetPassword = () => {
             w={'full'}
             colorScheme="yellow"
           >
-            Send Reset Link
+            Send Request Link
           </Button>
         </VStack>
       </form>
