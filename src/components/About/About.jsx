@@ -14,21 +14,23 @@ import { RiSecurePaymentFill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import introVideo from '../../assets/videos/intro.mp4';
 import termsAndCondition from '../../assets/docs/termsAndCondition';
+
 const Founder = () => (
-  <Stack direction={['column', 'row']} spacing={['4', '16']} padding="8">
+  <Stack direction={['column', 'row']} spacing={['4', '16']} padding={'8'}>
     <VStack>
       <Avatar
-        src="https://media.licdn.com/dms/image/C4D03AQEuXAJ2LiyK_A/profile-displayphoto-shrink_800_800/0/1662814207694?e=1681948800&v=beta&t=00cfDYXKRSIDOX9bKHEVbyxje3iEYwHGLmTL3KvEBTA"
+        src="https://avatars.githubusercontent.com/u/25058652"
         boxSize={['40', '48']}
       />
-      <Text children="Co-Founder" opacity={'0.7'} />
+      <Text children="Co-Founder" opacity={0.7} />
     </VStack>
 
     <VStack justifyContent={'center'} alignItems={['center', 'flex-start']}>
-      <Heading children="Nikhil Singh" size={['md', 'xl']} />
+      <Heading children="Abhishek Singh" size={['md', 'xl']} />
       <Text
         textAlign={['center', 'left']}
-        children={'Hi, I am a aspiring web Developer.'}
+        children={`Hi, I am a full-stack developer and a teacher.
+      Our mission is to provide quality content at reasonable price.`}
       />
     </VStack>
   </Stack>
@@ -37,14 +39,14 @@ const Founder = () => (
 const VideoPlayer = () => (
   <Box>
     <video
-      controls
       autoPlay
-      muted
       loop
-      src={introVideo}
+      muted
+      controls
       controlsList="nodownload nofullscreen noremoteplayback"
       disablePictureInPicture
       disableRemotePlayback
+      src={introVideo}
     ></video>
   </Box>
 );
@@ -57,18 +59,19 @@ const TandC = ({ termsAndCondition }) => (
       textAlign={['center', 'left']}
       my="4"
     />
-    <Box h={'sm'} p="4" overflowY={'scroll'}>
+
+    <Box h="sm" p="4" overflowY={'scroll'}>
       <Text
-        textAlign={['center', 'left']}
-        letterSpacing="widest"
         fontFamily={'heading'}
+        letterSpacing={'widest'}
+        textAlign={['center', 'left']}
       >
         {termsAndCondition}
       </Text>
       <Heading
-        children="Refund only applicable for cancellation within 7 days"
         my="4"
         size={'xs'}
+        children="Refund only applicable for cancellation within 7 days."
       />
     </Box>
   </Box>
@@ -78,11 +81,10 @@ const About = () => {
     <Container maxW={'container.lg'} padding="16" boxShadow={'lg'}>
       <Heading children="About Us" textAlign={['center', 'left']} />
       <Founder />
-
-      <Stack m={'8'} direction={['column', 'row']} alignItems="center">
+      <Stack m="8" direction={['column', 'row']} alignItems="center">
         <Text fontFamily={'cursive'} m="8" textAlign={['center', 'left']}>
-          we are a video streaming platform with some premium courses available
-          for you to learn and grow.
+          We are a video streaming platform with some premium courses available
+          only for premium users.
         </Text>
 
         <Link to="/subscribe">
@@ -91,16 +93,18 @@ const About = () => {
           </Button>
         </Link>
       </Stack>
+
       <VideoPlayer />
 
       <TandC termsAndCondition={termsAndCondition} />
-      <HStack my={'4'} padding="4">
+
+      <HStack my="4" p={'4'}>
         <RiSecurePaymentFill />
         <Heading
           size={'xs'}
           fontFamily="sans-serif"
           textTransform={'uppercase'}
-          children={'payment is secured by Razorpay'}
+          children={'Payment is secured by Razorpay'}
         />
       </HStack>
     </Container>

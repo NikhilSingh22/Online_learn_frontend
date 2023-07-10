@@ -1,13 +1,13 @@
 import React from 'react';
 import {
-  Heading,
-  Stack,
-  VStack,
-  Text,
-  Button,
-  Image,
   Box,
+  Button,
+  Heading,
   HStack,
+  Image,
+  Stack,
+  Text,
+  VStack,
 } from '@chakra-ui/react';
 import './home.css';
 import { Link } from 'react-router-dom';
@@ -17,7 +17,7 @@ import { SiCoursera, SiUdemy } from 'react-icons/si';
 import { DiAws } from 'react-icons/di';
 import introVideo from '../../assets/videos/intro.mp4';
 
-function Home() {
+const Home = () => {
   return (
     <section className="home">
       <div className="container">
@@ -26,22 +26,19 @@ function Home() {
           height="100%"
           justifyContent={['center', 'space-between']}
           alignItems="center"
-          spacing={['16', '18', '20', '56']}
+          spacing={['16', '56']}
         >
           <VStack
             width={'full'}
             alignItems={['center', 'flex-end']}
-            spacing="5"
+            spacing="8"
           >
-            <Heading
-              textAlign={['center', 'left']}
-              children="LEARN FROM THE EXPERTS"
-              size={'lg'}
-            />
+            <Heading children="LEARN FROM THE EXPERTS" size={'2xl'} />
             <Text
+              fontSize={'2xl'}
+              fontFamily="cursive"
               textAlign={['center', 'left']}
-              fontSize={'large'}
-              children="Find Valueable Context At Resonable Price"
+              children="Find Valuable Content At Reasonable Price"
             />
             <Link to="/courses">
               <Button size={'lg'} colorScheme="yellow">
@@ -49,6 +46,7 @@ function Home() {
               </Button>
             </Link>
           </VStack>
+
           <Image
             className="vector-graphics"
             boxSize={'md'}
@@ -80,16 +78,15 @@ function Home() {
 
       <div className="container2">
         <video
-          // autoPlay
           controls
-          src={introVideo}
           controlsList="nodownload nofullscreen noremoteplayback"
           disablePictureInPicture
           disableRemotePlayback
+          src={introVideo}
         ></video>
       </div>
     </section>
   );
-}
+};
 
 export default Home;

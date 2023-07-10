@@ -19,7 +19,7 @@ export const fileUploadCss = {
   width: '110%',
   border: 'none',
   height: '100%',
-  color: '#EEC94B',
+  color: '#ECC94B',
   backgroundColor: 'white',
 };
 
@@ -34,9 +34,11 @@ const Register = () => {
   const [imagePrev, setImagePrev] = useState('');
   const [image, setImage] = useState('');
 
+  const dispatch = useDispatch();
   const changeImageHandler = e => {
     const file = e.target.files[0];
     const reader = new FileReader();
+
     reader.readAsDataURL(file);
 
     reader.onloadend = () => {
@@ -45,10 +47,10 @@ const Register = () => {
     };
   };
 
-  const dispatch = useDispatch();
   const submitHandler = e => {
     e.preventDefault();
     const myForm = new FormData();
+
     myForm.append('name', name);
     myForm.append('email', email);
     myForm.append('password', password);
@@ -58,14 +60,15 @@ const Register = () => {
   };
 
   return (
-    <Container h={'100vh'}>
-      <VStack h={'full'} justifyContent="center" spacing={'4'}>
-        <Heading textTransform={'uppercase'} children="Register" />
+    <Container h={'95vh'}>
+      <VStack h={'full'} justifyContent="center" spacing={'16'}>
+        <Heading textTransform={'uppercase'} children={'Registration'} />
+
         <form onSubmit={submitHandler} style={{ width: '100%' }}>
-          <Box my={'2'} display={'flex'} justifyContent="center">
-            <Avatar src={imagePrev} size={'lg'} />
+          <Box my="4" display={'flex'} justifyContent="center">
+            <Avatar src={imagePrev} size={'2xl'} />
           </Box>
-          <Box my={'2'}>
+          <Box my={'4'}>
             <FormLabel htmlFor="name" children="Name" />
             <Input
               required
@@ -77,7 +80,8 @@ const Register = () => {
               focusBorderColor="yellow.500"
             />
           </Box>
-          <Box my={'2'}>
+
+          <Box my={'4'}>
             <FormLabel htmlFor="email" children="Email Address" />
             <Input
               required
@@ -89,25 +93,26 @@ const Register = () => {
               focusBorderColor="yellow.500"
             />
           </Box>
-          <Box my={'2'}>
+
+          <Box my={'4'}>
             <FormLabel htmlFor="password" children="Password" />
             <Input
               required
               id="password"
               value={password}
               onChange={e => setPassword(e.target.value)}
-              placeholder="Enter your password"
+              placeholder="Enter Your Password"
               type={'password'}
               focusBorderColor="yellow.500"
             />
           </Box>
 
-          <Box my={'2'}>
+          <Box my={'4'}>
             <FormLabel htmlFor="chooseAvatar" children="Choose Avatar" />
             <Input
-              required
               accept="image/*"
-              id="Avatar"
+              required
+              id="chooseAvatar"
               type={'file'}
               focusBorderColor="yellow.500"
               css={fileUploadStyle}
@@ -115,12 +120,12 @@ const Register = () => {
             />
           </Box>
 
-          <Button my={'2'} colorScheme={'yellow'} type="submit">
+          <Button my="4" colorScheme={'yellow'} type="submit">
             Sign Up
           </Button>
 
-          <Box my={'2'}>
-            Already have account?{' '}
+          <Box my="4">
+            Already Signed Up?{' '}
             <Link to="/login">
               <Button colorScheme={'yellow'} variant="link">
                 Login
