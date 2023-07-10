@@ -77,7 +77,7 @@ const AdminCourses = () => {
       dispatch({ type: 'clearMessage' });
     }
     dispatch(getAllCourses());
-  }, [dispatch, error, message]);
+  }, [dispatch, error, message, onClose]);
 
   return (
     <Grid

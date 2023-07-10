@@ -80,7 +80,7 @@ function Home() {
 
       <div className="container2">
         <video
-          // autoPlay
+          autoPlay
           controls
           src={introVideo}
           controlsList="nodownload nofullscreen noremoteplayback"

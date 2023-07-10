@@ -55,12 +55,15 @@ const Dashboard = () => {
   const {
     loading,
     stats,
-    usersCount,
     viewsCount,
+    subscriptionCount,
+    usersCount,
+    subscriptionPercentage,
     viewsPercentage,
     usersPercentage,
-    usersProfit,
+    subscriptionProfit,
     viewsProfit,
+    usersProfit,
   } = useSelector(state => state.admin);
 
   useEffect(() => {
@@ -111,9 +114,9 @@ const Dashboard = () => {
             {/* this should be changes similar to above but till now it is static */}
             <Databox
               title="Subscription"
-              qty={12}
-              qtyPercentage={20}
-              profit={false}
+              qty={subscriptionCount}
+              qtyPercentage={subscriptionPercentage}
+              profit={subscriptionProfit}
             />
           </Stack>
           <Box
@@ -145,7 +148,11 @@ const Dashboard = () => {
               <Box>
                 <Bar profit={viewsProfit} title="Views" value={viewsCount} />
                 <Bar profit={usersProfit} title="Users" value={usersCount} />
-                {/* <Bar profit={false} title="Subscription" value={20} /> */}
+                <Bar
+                  profit={subscriptionProfit}
+                  title="Subscription"
+                  value={subscriptionPercentage}
+                />
               </Box>
             </Box>
 

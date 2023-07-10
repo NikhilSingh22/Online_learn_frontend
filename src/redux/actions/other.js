@@ -1,15 +1,15 @@
-import { server } from '../store.js';
-
+import { server } from '../store';
 import axios from 'axios';
 
 export const contactUs = (name, email, message) => async dispatch => {
   try {
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        'Content-type': 'application/json',
       },
       withCredentials: true,
     };
+
     dispatch({ type: 'contactRequest' });
 
     const { data } = await axios.post(
@@ -31,10 +31,11 @@ export const courseRequest = (name, email, course) => async dispatch => {
   try {
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        'Content-type': 'application/json',
       },
       withCredentials: true,
     };
+
     dispatch({ type: 'courseRequestRequest' });
 
     const { data } = await axios.post(

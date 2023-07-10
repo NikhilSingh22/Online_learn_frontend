@@ -51,13 +51,13 @@ export const LineChart = ({ views = [] }) => {
   return <Line options={options} data={data} />;
 };
 
-export const DoughnutChart = () => {
+export const DoughnutChart = ({ users = [] }) => {
   const data = {
     labels: ['subscribed', 'Not Subscribed'],
     datasets: [
       {
         label: 'Views',
-        data: [3, 20], // users, this should be taken as paramter from function {users: []}
+        data: users, // users, this should be taken as paramter from function {users: []}
         borderColor: ['rgb(62,12,171)', 'rgb(214,43,129)'],
         backgroundColor: ['rgba(62,12,171,0.3)', 'rgba(214,43,129,0.3)'],
         borderWidth: 1,

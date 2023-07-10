@@ -6,21 +6,24 @@ export const adminReducer = createReducer(
     getAdminStatsRequest: state => {
       state.loading = true;
     },
-    // we haven't added the functinality of subscription here
     getAdminStatsSuccess: (state, action) => {
       state.loading = false;
       state.stats = action.payload.stats;
-      state.usersCount = action.payload.usersCount;
       state.viewsCount = action.payload.viewsCount;
+      state.subscriptionCount = action.payload.subscriptionCount;
+      state.usersCount = action.payload.usersCount;
+      state.subscriptionPercentage = action.payload.subscriptionPercentage;
       state.viewsPercentage = action.payload.viewsPercentage;
       state.usersPercentage = action.payload.usersPercentage;
-      state.usersProfit = action.payload.usersProfit;
+      state.subscriptionProfit = action.payload.subscriptionProfit;
       state.viewsProfit = action.payload.viewsProfit;
+      state.usersProfit = action.payload.usersProfit;
     },
     getAdminStatsFail: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
+
     getAllUsersRequest: state => {
       state.loading = true;
     },
@@ -29,17 +32,6 @@ export const adminReducer = createReducer(
       state.users = action.payload;
     },
     getAllUsersFail: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    },
-    deleteUserRequest: state => {
-      state.loading = true;
-    },
-    deleteUserSuccess: (state, action) => {
-      state.loading = false;
-      state.message = action.payload;
-    },
-    deleteUserFail: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
@@ -54,6 +46,18 @@ export const adminReducer = createReducer(
       state.loading = false;
       state.error = action.payload;
     },
+    deleteUserRequest: state => {
+      state.loading = true;
+    },
+    deleteUserSuccess: (state, action) => {
+      state.loading = false;
+      state.message = action.payload;
+    },
+    deleteUserFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
     createCourseRequest: state => {
       state.loading = true;
     },
@@ -76,6 +80,7 @@ export const adminReducer = createReducer(
       state.loading = false;
       state.error = action.payload;
     },
+
     addLectureRequest: state => {
       state.loading = true;
     },
@@ -87,6 +92,7 @@ export const adminReducer = createReducer(
       state.loading = false;
       state.error = action.payload;
     },
+
     deleteLectureRequest: state => {
       state.loading = true;
     },

@@ -37,8 +37,8 @@ const Founder = () => (
 const VideoPlayer = () => (
   <Box>
     <video
-      controls
       autoPlay
+      controls
       muted
       loop
       src={introVideo}

@@ -2,7 +2,7 @@ import { Box, Grid, Heading, Text, VStack } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 // import introVideo from '../../assets/videos/intro.mp4';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import { getCourseLectures } from '../../redux/actions/course';
 import Loader from '../Layout/Loader/Loader';
 
@@ -16,6 +16,13 @@ const CoursePage = ({ user }) => {
   useEffect(() => {
     dispatch(getCourseLectures(params.id));
   }, [dispatch, params.id]);
+
+  if (
+    user.role !== 'admin' &&
+    (user.subscription === undefined || user.subscription.status !== 'active')
+  ) {
+    return <Navigate to={'/subscribe'} />;
+  }
 
   return loading ? (
     <Loader />

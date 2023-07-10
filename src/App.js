@@ -1,35 +1,34 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import About from './components/About/About';
-import AdminCourses from './components/Admin/AdminCourses/AdminCourses';
-import CreateCourse from './components/Admin/CreateCourse/CreateCourse';
-import Dashboard from './components/Admin/Dashboard/Dashboard';
-import Users from './components/Admin/Users/Users';
 import ForgetPassword from './components/Auth/ForgetPassword';
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import ResetPassword from './components/Auth/ResetPassword';
 import Contact from './components/Contact/Contact';
-import CoursePage from './components/CoursePage/CoursePage';
 import Courses from './components/Courses/Courses';
 import Home from './components/Home/Home';
 import Footer from './components/Layout/Footer/Footer';
 import Header from './components/Layout/Header/Header';
-import NotFound from './components/Layout/NotFound/NotFound';
+import Request from './components/Request/Request';
+import About from './components/About/About';
+import Subscribe from './components/Payments/Subscribe';
 import PaymentFail from './components/Payments/PaymentFail';
 import PaymentSuccess from './components/Payments/PaymentSuccess';
-import Subscribe from './components/Payments/Subscribe';
-import ChangePassword from './components/Profile/ChangePassword';
+import NotFound from './components/Layout/NotFound/NotFound';
+import CoursePage from './components/CoursePage/CoursePage';
 import Profile from './components/Profile/Profile';
+import ChangePassword from './components/Profile/ChangePassword';
 import UpdateProfile from './components/Profile/UpdateProfile';
-import Request from './components/Request/Request';
+import Dashboard from './components/Admin/Dashboard/Dashboard';
+import CreateCourse from './components/Admin/CreateCourse/CreateCourse';
+import AdminCourses from './components/Admin/AdminCourses/AdminCourses';
+import Users from './components/Admin/Users/Users';
+import { useDispatch, useSelector } from 'react-redux';
 import toast, { Toaster } from 'react-hot-toast';
 import { loadUser } from './redux/actions/user';
 import { ProtectedRoute } from 'protected-route-react';
 import Loader from './components/Layout/Loader/Loader';
 
-// redux is still not dones
 function App() {
   window.addEventListener('contextmenu', e => {
     e.preventDefault();
@@ -45,6 +44,7 @@ function App() {
       toast.error(error);
       dispatch({ type: 'clearError' });
     }
+
     if (message) {
       toast.success(message);
       dispatch({ type: 'clearMessage' });
@@ -65,6 +65,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/courses" element={<Courses />} />
+
             <Route
               path="/course/:id"
               element={
@@ -73,6 +74,36 @@ function App() {
                 </ProtectedRoute>
               }
             />
+
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/request" element={<Request />} />
+            <Route path="/about" element={<About />} />
+
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <Profile user={user} />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/changepassword"
+              element={
+                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <ChangePassword />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/updateprofile"
+              element={
+                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <UpdateProfile user={user} />
+                </ProtectedRoute>
+              }
+            />
+
             <Route
               path="/login"
               element={
@@ -106,6 +137,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
+
             <Route
               path="/resetpassword/:token"
               element={
@@ -117,45 +149,29 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/request" element={<Request />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/subscribe" element={<Subscribe />} />
-            <Route path="/paymentfail" element={<PaymentFail />} />
-            <Route path="/paymentsuccess" element={<PaymentSuccess />} />
+
             <Route
-              path="/profile"
+              path="/subscribe"
               element={
                 <ProtectedRoute isAuthenticated={isAuthenticated}>
-                  <Profile user={user} />
+                  <Subscribe user={user} />
                 </ProtectedRoute>
               }
             />
-            <Route
-              path="/changepassword"
-              element={
-                <ProtectedRoute isAuthenticated={isAuthenticated}>
-                  <ChangePassword />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/updateprofile"
-              element={
-                <ProtectedRoute isAuthenticated={isAuthenticated}>
-                  <UpdateProfile user={user} />
-                </ProtectedRoute>
-              }
-            />
+
             <Route path="*" element={<NotFound />} />
 
-            {/* ADMIN ROUTES */}
+            <Route path="/paymentsuccess" element={<PaymentSuccess />} />
+
+            <Route path="/paymentfail" element={<PaymentFail />} />
+
+            {/* Admin Routes */}
             <Route
               path="/admin/dashboard"
               element={
                 <ProtectedRoute
-                  isAuthenticated={isAuthenticated}
                   adminRoute={true}
+                  isAuthenticated={isAuthenticated}
                   isAdmin={user && user.role === 'admin'}
                 >
                   <Dashboard />
@@ -163,11 +179,23 @@ function App() {
               }
             />
             <Route
+              path="/admin/createcourse"
+              element={
+                <ProtectedRoute
+                  adminRoute={true}
+                  isAuthenticated={isAuthenticated}
+                  isAdmin={user && user.role === 'admin'}
+                >
+                  <CreateCourse />
+                </ProtectedRoute>
+              }
+            />
+            <Route
               path="/admin/courses"
               element={
                 <ProtectedRoute
-                  isAuthenticated={isAuthenticated}
                   adminRoute={true}
+                  isAuthenticated={isAuthenticated}
                   isAdmin={user && user.role === 'admin'}
                 >
                   <AdminCourses />
@@ -178,27 +206,16 @@ function App() {
               path="/admin/users"
               element={
                 <ProtectedRoute
-                  isAuthenticated={isAuthenticated}
                   adminRoute={true}
+                  isAuthenticated={isAuthenticated}
                   isAdmin={user && user.role === 'admin'}
                 >
                   <Users />
                 </ProtectedRoute>
               }
             />
-            <Route
-              path="/admin/createcourse"
-              element={
-                <ProtectedRoute
-                  isAuthenticated={isAuthenticated}
-                  adminRoute={true}
-                  isAdmin={user && user.role === 'admin'}
-                >
-                  <CreateCourse />
-                </ProtectedRoute>
-              }
-            />
           </Routes>
+
           <Footer />
           <Toaster />
         </>
@@ -208,3 +225,5 @@ function App() {
 }
 
 export default App;
+
+// Admin admincourses

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { changepassword } from '../../redux/actions/profile';
+import { changePassword } from '../../redux/actions/profile';
 
 const ChangePassword = () => {
   const [oldPassword, setOldPassword] = useState('');
@@ -13,7 +13,7 @@ const ChangePassword = () => {
   const dispatch = useDispatch();
   const submitHandler = async e => {
     e.preventDefault();
-    await dispatch(changepassword(oldPassword, newPassword));
+    await dispatch(changePassword(oldPassword, newPassword));
     navigate('/profile');
   };
 

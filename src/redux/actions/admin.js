@@ -4,14 +4,15 @@ import axios from 'axios';
 
 export const createCourse = formdata => async dispatch => {
   try {
-    dispatch({ type: 'createCourseRequest' });
-
     const config = {
       headers: {
         'Content-type': 'multipart/form-data',
       },
       withCredentials: true,
     };
+
+    dispatch({ type: 'createCourseRequest' });
+
     const { data } = await axios.post(
       `${server}/createcourse`,
       formdata,
@@ -29,11 +30,11 @@ export const createCourse = formdata => async dispatch => {
 
 export const deleteCourse = id => async dispatch => {
   try {
-    dispatch({ type: 'deleteCourseRequest' });
-
     const config = {
       withCredentials: true,
     };
+    dispatch({ type: 'deleteCourseRequest' });
+
     const { data } = await axios.delete(`${server}/course/${id}`, config);
 
     dispatch({ type: 'deleteCourseSuccess', payload: data.message });
@@ -46,14 +47,14 @@ export const deleteCourse = id => async dispatch => {
 };
 export const addLecture = (id, formdata) => async dispatch => {
   try {
-    dispatch({ type: 'addLectureRequest' });
-
     const config = {
       headers: {
         'Content-type': 'multipart/form-data',
       },
       withCredentials: true,
     };
+
+    dispatch({ type: 'addLectureRequest' });
     const { data } = await axios.post(
       `${server}/course/${id}`,
       formdata,
@@ -71,11 +72,11 @@ export const addLecture = (id, formdata) => async dispatch => {
 
 export const deleteLecture = (courseId, lectureId) => async dispatch => {
   try {
-    dispatch({ type: 'deleteLectureRequest' });
-
     const config = {
       withCredentials: true,
     };
+    dispatch({ type: 'deleteLectureRequest' });
+
     const { data } = await axios.delete(
       `${server}/deletelecture?courseId=${courseId}&lectureId=${lectureId}`,
       config
@@ -92,11 +93,10 @@ export const deleteLecture = (courseId, lectureId) => async dispatch => {
 
 export const getAllUsers = () => async dispatch => {
   try {
-    dispatch({ type: 'getAllUsersRequest' });
-
     const config = {
       withCredentials: true,
     };
+    dispatch({ type: 'getAllUsersRequest' });
     const { data } = await axios.get(`${server}/admin/users`, config);
 
     dispatch({ type: 'getAllUsersSuccess', payload: data.users });
