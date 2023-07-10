@@ -18,7 +18,7 @@ const Founder = () => (
   <Stack direction={['column', 'row']} spacing={['4', '16']} padding="8">
     <VStack>
       <Avatar
-        src="https://media.licdn.com/dms/image/C4D03AQEuXAJ2LiyK_A/profile-displayphoto-shrink_800_800/0/1662814207694?e=1681948800&v=beta&t=00cfDYXKRSIDOX9bKHEVbyxje3iEYwHGLmTL3KvEBTA"
+        src="https://avatars.githubusercontent.com/u/77776708?v=4"
         boxSize={['40', '48']}
       />
       <Text children="Co-Founder" opacity={'0.7'} />
