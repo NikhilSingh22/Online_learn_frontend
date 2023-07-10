@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { resetpassword } from '../../redux/actions/profile';
+import { resetPassword } from '../../redux/actions/profile';
 
 const ResetPassword = () => {
   const [password, setPassword] = useState('');
@@ -15,7 +15,7 @@ const ResetPassword = () => {
   const dispatch = useDispatch();
   const submitHandler = e => {
     e.preventDefault();
-    dispatch(resetpassword(params.token, password));
+    dispatch(resetPassword(params.token, password));
   };
 
   useEffect(() => {
