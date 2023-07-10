@@ -25,7 +25,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
   removeFromPlaylist,
-  updateprofilePicture,
+  updateProfilePicture,
 } from '../../redux/actions/profile';
 import { loadUser } from '../../redux/actions/user';
 import { fileUploadCss } from '../Auth/Register';
@@ -44,7 +44,7 @@ const Profile = ({ user }) => {
     const myForm = new FormData();
     myForm.append('file', image);
 
-    await dispatch(updateprofilePicture(myForm));
+    await dispatch(updateProfilePicture(myForm));
 
     dispatch(loadUser());
   };
