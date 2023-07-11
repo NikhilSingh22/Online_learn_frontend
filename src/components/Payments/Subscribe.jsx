@@ -57,7 +57,7 @@ const Subscribe = ({ user }) => {
             contact: '',
           },
           notes: {
-            address: '6 pack programmer at youtube',
+            address: 'Providing premium content very cheap',
           },
           theme: {
             color: '#FFC800',
