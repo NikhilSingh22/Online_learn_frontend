@@ -1,12 +1,13 @@
 import { Button, Container, Heading, Input, VStack } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
-import { toast } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { resetPassword } from '../../redux/actions/profile';
 
 const ResetPassword = () => {
   const [password, setPassword] = useState('');
+
   const params = useParams();
   const navigate = useNavigate();
 
@@ -45,7 +46,7 @@ const ResetPassword = () => {
             required
             value={password}
             onChange={e => setPassword(e.target.value)}
-            placeholder="new password"
+            placeholder="New Password"
             type={'password'}
             focusBorderColor="yellow.500"
           />
@@ -63,4 +64,5 @@ const ResetPassword = () => {
     </Container>
   );
 };
+
 export default ResetPassword;
